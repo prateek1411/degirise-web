@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>ALL FILES:</p>
+{% for file in allfiles %}
+  {{ file }}
+    <br>
+{% endfor %}
+{% endblock %}
