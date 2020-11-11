@@ -1,13 +1,33 @@
 <!-- templates/registration/login.html -->
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
-
+ <div class="box">
 {% block content %}
-<h1  class="title">Log In</h1>
-<form method="post">
+ <form class="column is-4 is-offset-4" method="post">
+   <h1  class="title">Log In</h1>
   {% csrf_token %}
-  {{ form.as_p }}
+            <div class="field">
+                <div class="control">
+                    <input autofocus="" class="input is-large" name="username" placeholder="Your Username" type="text" id="id_username">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" name="password" placeholder="Your Password" type="password" id="id_password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Remember me
+                </label>
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth">Login</button>
+  </form>
+</div>
+
   <button type="submit">Log In</button>
 </form>
 {% endblock %}
+</div>

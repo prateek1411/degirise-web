@@ -1,12 +1,41 @@
 <!-- templates/registration/signup.html -->
 {% extends 'base.html' %}
 
-{% block title %}Sign Up{% endblock %}
+    <div class="box">
+
 {% block content %}
-<h1  class="title">Sign up</h1>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
+    <div class="column is-4 is-offset-4">
+    <h3 class="title">Sign Up</h3>
+           <div class="field">
+                <div class="control">
+                    <label class="is-large" for="id_username">User Name:</label>
+                    <input autofocus="" class="input is-large" name="username" placeholder="Username" type="text" id="id_username">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="is-large" for="id_name">Your Full Name: </label>
+                    <input autofocus="" class="input is-large" name="name" placeholder="Name" type="text" id="id_name">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="is-large" for="id_password1">Your Password: </label>
+                    <input class="input is-large" name="password1" placeholder="Password" type="password" id="id_password1">
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <label class="is-large" for="id_password2">Repeat your Password: </label>
+                    <input class="input is-large" name="password2" placeholder="Password" type="password" id="id_password2">
+                </div>
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
+    </div>
   </form>
-{% endblock %}
+      {% endblock %}
+    </div>

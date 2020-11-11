@@ -40,10 +40,10 @@ def signup(request):
             login(request, user)
             return redirect('/')
         else:
-            return render(request, 'webApp/signup.html', {'form': form})
+            return render(request, 'registration/signup.html', {'form': form})
     else:
         form = UserCreationForm()
-        return render(request, 'webApp/signup.html', {'form': form})
+        return render(request, 'registration/signup.html', {'form': form})
 
 
 @ensure_csrf_cookie
@@ -58,17 +58,18 @@ def model_form_upload(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            args = {'uploaded_file': form.files['document']}
+            return render(request, 'webApp/upload.html', args)
     else:
         form = DocumentForm()
-    return render(request, 'webApp/model_form_upload.html', {
+    return render(request, 'webApp/upload.html', {
         'form': form
     })
 
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('index')
     template_name = 'registration/signup.html'
 
 

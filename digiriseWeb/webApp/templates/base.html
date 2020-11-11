@@ -43,6 +43,25 @@
 
     <div class="hero-body">
         <div class="container">
+    {% if form.errors %}
+    <div class="notification is-danger alert-dismissible col-12 mx-1" role="alert">
+        <div id="form_errors1">
+        {% for key, value in form.errors.items %}
+           {% for error in value %}
+               {% if 'already exists' in error %}
+                   <span class="fieldWrapper">
+                       {{ error }}. Go to <a href="{% url 'login' %}">login page</a>.
+                   </span>
+               {% else %}
+                   <span class="fieldWrapper">
+                       {{ error }}
+                   </span>
+               {% endif %}
+            {% endfor %}    
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
             {% block content %}
             {% endblock %}
         </div>
