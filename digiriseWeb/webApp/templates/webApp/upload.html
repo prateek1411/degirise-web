@@ -5,13 +5,19 @@
 {% block content %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <p><label for="id_document">Document:</label><input type="file" name="document" required id="id_document"></p>
-    <button type="submit">Upload</button>
+            <div class="field">
+                <div class="control">
+                  <label class="label is-large" for="id_document">Document:</label>
+                    <input autofocus="" class="input is-large" name="document" placeholder="Your Username" type="file" id="id_document">
+                </div>
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth">Submit</button>
   </form>
 
   {% if uploaded_file %}
-    <p>File uploaded at: <a href="{% url 'listfile' '' %}">List Files</a></p>
-    <p>File can be downloaded at: <a href="{% url 'listfile' uploaded_file %}">Download {{ uploaded_file }}</a></p>
+
+    <p class="has-text-black"><a href="{% url 'listfile' uploaded_file %}"><strong>Download {{ uploaded_file }}</strong></a></p>
+    <p class="has-text-black"><a href="{% url 'listfile' '' %}"><strong>List All Files</strong></a></p>
   {% endif %}
 
   <p><a href="{% url 'index' %}">Return to home</a></p>
