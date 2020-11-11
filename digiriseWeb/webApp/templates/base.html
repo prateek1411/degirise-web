@@ -10,17 +10,61 @@
 </head>
 
 <body>
+{% load static %}
 <section class="hero is-primary is-fullheight">
     <div class="hero-head">
-        <nav class="navbar">
-            <div class="container is-fluid">
-                <div class="navbar-menu" id="navbarMenuHeroA">
+   <nav class="navbar is-transparent">
+  <div class="navbar-brand">
+    <a class="navbar-item " href="{% url 'index' %}">
+
+      <img class="is-rounded" src="{% static 'webApp/digirise.png' %}" alt="Diirise" width="112" height="28">
+
+    </a>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="digiriseNavBar" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="{% url 'index' %}">
+        Home
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Docs
+        </a>
+        <div class="navbar-dropdown is-boxed">
+          <a class="navbar-item">
+            Overview
+          </a>
+          <a class="navbar-item">
+            Modifiers
+          </a>
+          <a class="navbar-item">
+            Columns
+          </a>
+          <a class="navbar-item">
+            Layout
+          </a>
+          <a class="navbar-item">
+            Form
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Elements
+          </a>
+          <a class="navbar-item is-active">
+            Components
+          </a>
+        </div>
+      </div>
+    </div>
                     <div class="navbar-end">
-                        <a class="navbar-item" href="{% url 'index' %}">
-                            Home
-                        </a>
-                        {% if user.is_authenticated %}
-                        <p class="navbar-item is-strong">{{ user.first_name }} {{ user.last_name }}</p>
+                         {% if user.is_authenticated %}
+                        <p class="navbar-item is-strong">Welcome {{ user.first_name }} {{ user.last_name }}</p>
                         <a class="navbar-item" href="{% url 'upload' %}">
                             Upload Files
                         </a>
@@ -34,9 +78,16 @@
                         </a>
                          {% endif %}
                     </div>
-                </div>
-            </div>
-        </nav>
+      </div>
+</nav>
+
+
+
+
+
+
+
+
     </div>
 
     <div class="hero-body">
