@@ -3,7 +3,7 @@ version: "3.6"
 
 services:
   digirise-web:
-    image: digirise-web
+    image: prateek1411/digirise-web
     restart: always
     container_name: "digirise-web"
     ports:
@@ -17,6 +17,7 @@ services:
       - db
   db:
     image: library/postgres:12
+    container_name: "db"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
