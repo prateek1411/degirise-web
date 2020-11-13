@@ -2,6 +2,15 @@
 
 {% block content %}
 {% load static %}
+<div class="tile is-ancestor">
+    {% if not user.is_authenticated %}
+    <div class="tile is-parent is-horizontal">
+        <div class="tile is-child box">
+            <a class="is-success" href="{% url 'login'%}"><p class="subtitle is-center has-text-black">Not Logged on: Please Login</p></a>
+        </div>
+    </div>
+    {% endif %}
+</div>
 <h1 class="title">
     Digirise
 </h1>
