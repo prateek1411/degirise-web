@@ -1,0 +1,28 @@
+---
+version: "3.6"
+
+services:
+  digirise-web:
+    image: digirise-web
+    restart: always
+    container_name: "digirise-web"
+    ports:
+      - "5000:8010"
+    volumes:
+      - ./upload_files:/opt/app/digiriseWeb/upload_files:z
+      - ./static:/opt/app/digiriseWeb/static:z
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+  db:
+    image: library/postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=digirise_user
+      - POSTGRES_PASSWORD=deErjv#%67D
+      - POSTGRES_DB=digirise
+
+volumes:
+  postgres_data:
