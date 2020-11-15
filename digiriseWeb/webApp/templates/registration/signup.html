@@ -1,41 +1,44 @@
 <!-- templates/registration/signup.html -->
 {% extends 'base.html' %}
 
-    <div class="box">
+<div class="box">
 
-{% block content %}
-  <form method="post">
-    {% csrf_token %}
-    <div class="column is-4 is-offset-4">
-    <h3 class="title">Sign Up</h3>
-           <div class="field">
+    {% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="column is-4 is-offset-4">
+            <h3 class="title">Sign Up</h3>
+            <div class="field">
                 <div class="control">
                     <label class="is-large" for="id_username">User Name:</label>
-                    <input autofocus="" class="input is-large" name="username" placeholder="Username" type="text" id="id_username">
+                    <input autofocus="" class="input is-large" id="id_username" name="username" placeholder="Username"
+                           type="text">
                 </div>
             </div>
 
             <div class="field">
                 <div class="control">
                     <label class="is-large" for="id_name">Your Full Name: </label>
-                    <input autofocus="" class="input is-large" name="name" placeholder="Name" type="text" id="id_name">
+                    <input autofocus="" class="input is-large" id="id_name" name="name" placeholder="Name" type="text">
                 </div>
             </div>
 
             <div class="field">
                 <div class="control">
                     <label class="is-large" for="id_password1">Your Password: </label>
-                    <input class="input is-large" name="password1" placeholder="Password" type="password" id="id_password1">
+                    <input class="input is-large" id="id_password1" name="password1" placeholder="Password"
+                           type="password">
                 </div>
             </div>
             <div class="field">
                 <div class="control">
                     <label class="is-large" for="id_password2">Repeat your Password: </label>
-                    <input class="input is-large" name="password2" placeholder="Password" type="password" id="id_password2">
+                    <input class="input is-large" id="id_password2" name="password2" placeholder="Password"
+                           type="password">
                 </div>
             </div>
             <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
-    </div>
-  </form>
-      {% endblock %}
-    </div>
+        </div>
+    </form>
+    {% endblock %}
+</div>

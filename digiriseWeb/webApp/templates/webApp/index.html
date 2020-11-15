@@ -6,7 +6,8 @@
     {% if not user.is_authenticated %}
     <div class="tile is-parent is-horizontal">
         <div class="tile is-child box">
-            <a class="is-success" href="{% url 'login'%}"><p class="subtitle is-center has-text-black">Not Logged on: Please Login</p></a>
+            <a class="is-success" href="{% url 'login'%}"><p class="subtitle is-center has-text-black">Not Logged on:
+                Please Login</p></a>
         </div>
     </div>
     {% endif %}
@@ -21,13 +22,14 @@
         <div class="tile is-child box">
             <p class="title has-text-black">Shrinkhla</p>
             <figure class="image is-128x128">
-                <img src="https://digirisestatic.blob.core.windows.net/static/webApp/Shrinkhla.jpg" alt="Shrinkhla Kishore">
+                <img alt="Shrinkhla Kishore"
+                     src="https://digirisestatic.blob.core.windows.net/static/webApp/Shrinkhla.jpg">
             </figure>
         </div>
         <div class="tile is-child box">
             <p class="title has-text-black">Prateek</p>
             <figure class="image is-128x128">
-                <img src="https://digirisestatic.blob.core.windows.net/static/webApp/Prateek.jpg" alt="Prateek Kishore">
+                <img alt="Prateek Kishore" src="https://digirisestatic.blob.core.windows.net/static/webApp/Prateek.jpg">
             </figure>
         </div>
     </div>

@@ -1,20 +1,13 @@
-import os
-from os import listdir
-from os.path import isfile, join
-
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.template import loader
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.forms import UserCreationForm
+# Create your views here.
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.template import loader
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.decorators.csrf import ensure_csrf_cookie
-from django.contrib.auth.decorators import login_required
-from django.contrib.staticfiles.utils import get_files
-from django.contrib.staticfiles.storage import StaticFilesStorage
-
-# Create your views here.
-from django.http import HttpResponse
 from django.views.static import serve
 
 from .forms import DocumentForm
@@ -26,6 +19,7 @@ def index(request):
         'latest_question_list': [],
     }
     return HttpResponse(template.render(context, request))
+
 
 def signup(request):
     if request.user.is_authenticated:
@@ -52,7 +46,12 @@ def signout(request):
     return redirect('/')
 
 
+def email_check(user):
+    return user.email.endswith('@example.com')
+
+
 @login_required(login_url='login')
+@permission_required('webApp.add_document')
 def model_form_upload(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -80,7 +79,6 @@ class UploadView(generic.CreateView):
 
 
 @login_required(login_url='login')
-def upload_files_list(request,filepath):
-    return serve(request, path=filepath ,document_root='upload_files', show_indexes=True)
-
-# ['analytics/report...', 'analytics/...', ...]
+@permission_required('webApp.view_document')
+def upload_files_list(request, filepath):
+    return serve(request, path=filepath, document_root='upload_files', show_indexes=True)

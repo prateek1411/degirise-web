@@ -3,22 +3,24 @@
 {% load static %}
 
 {% block content %}
-  <form method="post" enctype="multipart/form-data">
+<form enctype="multipart/form-data" method="post">
     {% csrf_token %}
-            <div class="field">
-                <div class="control">
-                  <label class="label is-large" for="id_document">Document:</label>
-                    <input autofocus="" class="input is-large" name="document" placeholder="Your Username" type="file" id="id_document">
-                </div>
-            </div>
-            <button class="button is-block is-info is-large is-fullwidth">Submit</button>
-  </form>
+    <div class="field">
+        <div class="control">
+            <label class="label is-large" for="id_document">Document:</label>
+            <input autofocus="" class="input is-large" id="id_document" name="document" placeholder="Your Username"
+                   type="file">
+        </div>
+    </div>
+    <button class="button is-block is-info is-large is-fullwidth">Submit</button>
+</form>
 
-  {% if uploaded_file %}
+{% if uploaded_file %}
 
-    <p class="has-text-black"><a href="{% url 'listfile' uploaded_file %}"><strong>Download {{ uploaded_file }}</strong></a></p>
-    <p class="has-text-black"><a href="{% url 'listfile' '' %}"><strong>List All Files</strong></a></p>
-  {% endif %}
+<p class="has-text-black"><a href="{% url 'listfile' uploaded_file %}"><strong>Download {{ uploaded_file }}</strong></a>
+</p>
+<p class="has-text-black"><a href="{% url 'listfile' '' %}"><strong>List All Files</strong></a></p>
+{% endif %}
 
-  <p><a href="{% url 'index' %}">Return to home</a></p>
+<p><a href="{% url 'index' %}">Return to home</a></p>
 {% endblock %}
