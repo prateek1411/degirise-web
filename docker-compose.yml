@@ -10,6 +10,7 @@ services:
       - "5000:8010"
     volumes:
       - ./upload_files:/opt/app/digiriseWeb/upload_files:z
+      - ./static:/opt/app/digiriseWeb/static:z
     env_file:
       - ./.env.prod
     depends_on:
