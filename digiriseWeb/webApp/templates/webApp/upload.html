@@ -19,7 +19,6 @@
 
     <div class="slide">
         <a download href="{{ uploaded_file.document.url }}?{{ sas_token }}">
-            {{ uploaded_file.document }}
             {% if uploaded_file.get_extension == '.jpg'  or uploaded_file.get_extension == '.png' %}
             {% load thumbnail %}
             {% thumbnail uploaded_file.document '200x100' padding=True as im %}
