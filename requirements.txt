@@ -4,6 +4,6 @@ django-storages[azure]
 azure-storage-common
 sorl-thumbnail
 django-filer
-psycopg2
+psycopg2-binary==2.8.6
 
 
