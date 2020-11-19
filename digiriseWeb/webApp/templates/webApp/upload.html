@@ -26,21 +26,21 @@
             <img src="{{ im.url }}?{{ sas_token }}">
             {% endthumbnail %}
             {% elif uploaded_file.get_extension == '.pdf' %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_pdf.png?{{ sas_token }}">
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_pdf.png">
             {% elif uploaded_file.get_extension == '.log' %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_txt.png?{{ sas_token }}">
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_txt.png">
             {% elif 'doc' in uploaded_file.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_doc.png?{{ sas_token }}">
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_doc.png">
             {% elif 'xls' in uploaded_file.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_xls.png?{{ sas_token }}">
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_xls.png">
             {% elif 'zip' in uploaded_file.get_extension or rar in uploaded_file.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_zip.png?{{ sas_token }}">
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_zip.png">
             {% elif 'ppt' in uploaded_file.get_extension or 'PPT' in uploaded_file.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_ppt.png?{{ sas_token }}">
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_ppt.png">
             {% elif 'htm' in uploaded_file.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_html.png?{{ sas_token }}">
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_html.png">
             {% else %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_icons-18.png?{{ sas_token }}">
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_icons-18.png">
             {% endif %}
         </a>
 
