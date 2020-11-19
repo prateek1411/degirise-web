@@ -6,5 +6,6 @@ from storages.backends.azure_storage import AzureStorage
 
 
 class AzureMediaStorage(AzureStorage):
-    location = 'media'
+    azure_container = settings.MEDIA_CONTAINER
+    location = 'webApp'
     file_overwrite = False

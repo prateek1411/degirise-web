@@ -19,7 +19,7 @@ from .models import Document
 
 def get_sas_token():
     blobService = BlockBlobService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-    sas_token = blobService.generate_container_shared_access_signature(settings.AZURE_CONTAINER,
+    sas_token = blobService.generate_container_shared_access_signature(settings.MEDIA_CONTAINER,
                                                                        ContainerPermissions.READ,
                                                                        datetime.utcnow() + timedelta(hours=1))
     # print url

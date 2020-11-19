@@ -20,11 +20,27 @@
     <div class="slide">
         <a download href="{{ uploaded_file.document.url }}?{{ sas_token }}">
             {{ uploaded_file.document }}
-            {% if uploaded_file.get_extension == '.jpg' %}
+            {% if uploaded_file.get_extension == '.jpg'  or uploaded_file.get_extension == '.png' %}
             {% load thumbnail %}
             {% thumbnail uploaded_file.document '200x100' padding=True as im %}
             <img src="{{ im.url }}?{{ sas_token }}">
             {% endthumbnail %}
+            {% elif uploaded_file.get_extension == '.pdf' %}
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_pdf.png?{{ sas_token }}">
+            {% elif uploaded_file.get_extension == '.log' %}
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_txt.png?{{ sas_token }}">
+            {% elif 'doc' in uploaded_file.get_extension %}
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_doc.png?{{ sas_token }}">
+            {% elif 'xls' in uploaded_file.get_extension %}
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_xls.png?{{ sas_token }}">
+            {% elif 'zip' in uploaded_file.get_extension or rar in uploaded_file.get_extension %}
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_zip.png?{{ sas_token }}">
+            {% elif 'ppt' in uploaded_file.get_extension or 'PPT' in uploaded_file.get_extension %}
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_ppt.png?{{ sas_token }}">
+            {% elif 'htm' in uploaded_file.get_extension %}
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_html.png?{{ sas_token }}">
+            {% else %}
+            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_icons-18.png?{{ sas_token }}">
             {% endif %}
         </a>
 
