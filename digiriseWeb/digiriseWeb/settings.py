@@ -36,7 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+    'easy_thumbnails',
+    'sorl.thumbnail',
+    'filer'
+   ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +53,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'digiriseWeb.urls'
 
+#THUMBNAIL_PROCESSORS = (
+#    'easy_thumbnails.processors.colorspace',
+#    'easy_thumbnails.processors.autocrop',
+#    #'easy_thumbnails.processors.scale_and_crop',
+#    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+#    'easy_thumbnails.processors.filters',
+#)
+#
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -131,3 +142,19 @@ LOGOUT_REDIRECT_URL = 'index'
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
 MEDIA_ROOT = 'upload_files'
+
+#########Azure Specific#############
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'webApp/static/webApp'),
+]
+AZURE_ACCOUNT_NAME = 'digirisestatic'
+AZURE_ACCOUNT_KEY = 'UEGdD0qYaSw010hzqwcEHQR87FNyadYCiN1CRKgPp7bH7/kzxhNF4e3XXtTQw3G2lc5WdNT5kiV6vXHB96sXsQ=='
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+AZURE_LOCATION = 'webApp'
+AZURE_CONTAINER = 'static'
+
+STATIC_LOCATION = 'static'
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+DEFAULT_FILE_STORAGE = 'digiriseWeb.custom_azure.AzureMediaStorage'
+
