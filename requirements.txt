@@ -4,5 +4,6 @@ django-storages[azure]
 azure-storage-common
 sorl-thumbnail
 django-filer
+psycopg2
 
 
