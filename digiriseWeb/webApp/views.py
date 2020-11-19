@@ -1,9 +1,13 @@
+from datetime import datetime, timedelta
+
+from azure.storage.blob import BlockBlobService, ContainerPermissions
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_list_or_404
 from django.template import loader
 from django.urls import reverse_lazy
 from django.views import generic
@@ -11,7 +15,15 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.static import serve
 
 from .forms import DocumentForm
+from .models import Document
 
+def get_sas_token():
+    blobService = BlockBlobService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+    sas_token = blobService.generate_container_shared_access_signature(settings.AZURE_CONTAINER,
+                                                                       ContainerPermissions.READ,
+                                                                       datetime.utcnow() + timedelta(hours=1))
+    # print url
+    return sas_token
 
 def index(request):
     template = loader.get_template('webApp/index.html')
@@ -52,12 +64,15 @@ def email_check(user):
 
 @login_required(login_url='login')
 @permission_required('webApp.add_document')
-def model_form_upload(request):
+def file_upload(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            args = {'uploaded_file': form.files['document']}
+            resp = form.save()
+            document_name=resp.document
+            args = Document.objects.get(document=document_name)
+            sas_token = get_sas_token()
+            args = {'uploaded_file': args, 'sas_token': sas_token}
             return render(request, 'webApp/upload.html', args)
     else:
         form = DocumentForm()
@@ -81,4 +96,10 @@ class UploadView(generic.CreateView):
 @login_required(login_url='login')
 @permission_required('webApp.view_document')
 def upload_files_list(request, filepath):
-    return serve(request, path=filepath, document_root='upload_files', show_indexes=True)
+    args = Document.objects.all()
+    sas_token = get_sas_token()
+    return render(request, 'webApp/upload_list.html', {"doc_list": args, "sas_token": sas_token})
+
+def delete_all_files(request):
+    args = Document.objects.all().delete()
+    return render(request,'webApp/delete_all_files.html')

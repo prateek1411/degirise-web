@@ -8,7 +8,7 @@
     <div class="field">
         <div class="control">
             <label class="label is-large" for="id_document">Document:</label>
-            <input autofocus="" class="input is-large" id="id_document" name="document" placeholder="Your Username"
+            <input autofocus="" class="input is-large" id="id_document" name="document" placeholder="Your Document"
                    type="file">
         </div>
     </div>
@@ -17,7 +17,21 @@
 
 {% if uploaded_file %}
 
-<p class="has-text-black"><a href="{% url 'listfile' uploaded_file %}"><strong>Download {{ uploaded_file }}</strong></a>
+    <div class="slide">
+        <a download href="{{ uploaded_file.document.url }}?{{ sas_token }}">
+            {{ uploaded_file.document }}
+            {% if uploaded_file.get_extension == '.jpg' %}
+            {% load thumbnail %}
+            {% thumbnail uploaded_file.document '200x100' padding=True as im %}
+            <img src="{{ im.url }}?{{ sas_token }}">
+            {% endthumbnail %}
+            {% endif %}
+        </a>
+
+        <div class="caption" style="bottom:0">
+            <p>{{ doc.document}}</p>
+        </div>
+    </div>
 </p>
 <p class="has-text-black"><a href="{% url 'listfile' '' %}"><strong>List All Files</strong></a></p>
 {% endif %}
