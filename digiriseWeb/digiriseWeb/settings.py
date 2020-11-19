@@ -19,10 +19,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'k5wgojir=p8ic=2*@snm&ob-zw8pih_#$h&x#d#t#b(t*#&ot8'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG',False)
 
 ALLOWED_HOSTS = ['digirise.westeurope.cloudapp.azure.com', 'localhost', '127.0.0.1']
 
@@ -146,8 +146,8 @@ MEDIA_ROOT = 'upload_files'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'webApp/static/webApp'),
 ]
-AZURE_ACCOUNT_NAME = 'digirisestatic'
-AZURE_ACCOUNT_KEY = 'UEGdD0qYaSw010hzqwcEHQR87FNyadYCiN1CRKgPp7bH7/kzxhNF4e3XXtTQw3G2lc5WdNT5kiV6vXHB96sXsQ=='
+AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')
+AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 AZURE_LOCATION = 'webApp'
 AZURE_CONTAINER = 'static'
