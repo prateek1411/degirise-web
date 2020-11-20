@@ -6,7 +6,9 @@
 {% block content %}
 {% load thumbnail %}
 <div class="tile is-ancestor">
+
     {% for doc_set in doc_list %}
+        <div class="tile is-parent is-vertical">
          <div class="tile is-parent">
          {% for doc in doc_set %}
         <div class="tile is-child is-3 box">
@@ -41,6 +43,7 @@
         </div>
      {% endfor %}
     </div>
+        </div>
     {% endfor %}
 
 
