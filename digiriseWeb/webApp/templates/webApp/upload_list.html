@@ -10,7 +10,7 @@
     {% for doc_set in doc_list %}
          <div class="tile is-parent is-vertical">
          {% for doc in doc_set %}
-        <div class="tile is-child is-3 box ">
+        <div class="tile is-child box ">
        <a download href="{{ doc.document.url }}?{{ sas_token }}">
             {% load thumbnail %}
             {% if doc.get_extension == '.jpg' or doc.get_extension == '.png' %}
