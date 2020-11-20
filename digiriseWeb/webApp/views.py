@@ -1,3 +1,4 @@
+import itertools
 from datetime import datetime, timedelta
 
 from azure.storage.blob import BlockBlobService, ContainerPermissions
@@ -97,8 +98,9 @@ class UploadView(generic.CreateView):
 @permission_required('webApp.view_document')
 def upload_files_list(request, filepath):
     args = Document.objects.all()
+    result = [[v for v in itertools.islice(args,start,start+5)] for start in range(0,len(args),5)]
     sas_token = get_sas_token()
-    return render(request, 'webApp/upload_list.html', {"doc_list": args, "sas_token": sas_token})
+    return render(request, 'webApp/upload_list.html', {"doc_list": result, "sas_token": sas_token})
 
 def delete_all_files(request):
     args = Document.objects.all().delete()
