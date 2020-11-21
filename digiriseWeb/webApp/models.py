@@ -13,3 +13,10 @@ class Document(models.Model):
     def get_extension(self):
         name, extension = os.path.splitext(self.document.name)
         return extension
+
+    def get_short_name(self):
+        if len(self.document.name) > 10:
+            return self.document.name[:9]
+        else:
+            return self.document.name
+
