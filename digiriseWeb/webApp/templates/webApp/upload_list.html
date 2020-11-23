@@ -36,9 +36,11 @@
             {% endif %}
 
         </a>
+            <a class="has-tooltip-bottom" data-tooltip="{{doc.document.name}}" download href="{{ doc.document.url }}?{{ sas_token }}">
          <p class="caption is-size-7" style="bottom:0" >
             {{ doc.get_short_name }}
         </p>
+            </a>
         </div>
      {% endfor %}
         </div>
