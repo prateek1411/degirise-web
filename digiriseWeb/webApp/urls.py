@@ -14,6 +14,7 @@ urlpatterns = [
                   path('password_reset', auth_views.PasswordResetView.as_view(), name='password_reset'),
                   path('upload', views.file_upload, name='upload'),
                   path('', views.index, name='index'),
+                  path('about_us', views.about_us, name='about_us'),
                   url('upload_files/(?P<filepath>.*)$', views.upload_files_list, name='listfile'),
                   path('delete_all_files', views.delete_all_files, name='delete_all_files')
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

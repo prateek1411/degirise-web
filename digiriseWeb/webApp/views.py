@@ -27,11 +27,10 @@ def get_sas_token():
     return sas_token
 
 def index(request):
-    template = loader.get_template('webApp/index.html')
-    context = {
-        'latest_question_list': [],
-    }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'webApp/index.html')
+
+def about_us(request):
+    return render(request, 'webApp/about_us.html')
 
 
 def signup(request):
