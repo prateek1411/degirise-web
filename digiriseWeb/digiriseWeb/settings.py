@@ -184,4 +184,4 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
-
+API='http://127.0.0.1:5000/'

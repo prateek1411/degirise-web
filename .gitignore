@@ -1,0 +1,5 @@
+.env
+.env.prod
+**/db.sqlite3
+.vscode
+.pip_cache
