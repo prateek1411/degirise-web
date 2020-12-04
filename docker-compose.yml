@@ -15,6 +15,13 @@ services:
       - ./.env.prod
     depends_on:
       - db
+      - infrastructure-code
+  infrastructure-code:
+    image: prateek1411/infrastructure_code
+    restart: always
+    container_name: "infrastructure-code"
+    env_file:
+      - ./.env
   db:
     image: library/postgres:12
     container_name: "db"
@@ -24,6 +31,5 @@ services:
       - POSTGRES_USER=digirise_user
       - POSTGRES_PASSWORD=deErjv#%67D
       - POSTGRES_DB=digirise
-
 volumes:
   postgres_data:

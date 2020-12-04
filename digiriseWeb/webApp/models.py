@@ -2,7 +2,6 @@ import os
 
 from django.db import models
 
-
 # Create your models here.
 
 class Document(models.Model):
@@ -19,4 +18,3 @@ class Document(models.Model):
             return self.document.name[:9]
         else:
             return self.document.name
-
