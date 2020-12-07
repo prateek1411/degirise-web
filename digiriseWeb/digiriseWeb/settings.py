@@ -174,8 +174,7 @@ OAUTH_URL_WHITELISTS = []
 OAUTH_CLIENT_NAME = 'github'
 
 OAUTH_CLIENT = {
-    'client_id': '5e848e0e7b92272a273f',
-    'client_secret': 'f7db363241746ae3c045a15efa8c8ecf394bb024',
+
     'access_token_url': 'https://github.com/login/oauth/access_token',
     'authorize_url': 'https://github.com/login/oauth/authorize',
     'api_base_url': 'https://api.github.com/',
