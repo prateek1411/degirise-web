@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'oauth2_provider',
+    'corsheaders',
     'easy_thumbnails',
     'sorl.thumbnail',
     'filer'
@@ -54,18 +55,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'digiriseWeb.urls'
 
-#THUMBNAIL_PROCESSORS = (
-#    'easy_thumbnails.processors.colorspace',
-#    'easy_thumbnails.processors.autocrop',
-#    #'easy_thumbnails.processors.scale_and_crop',
-#    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
-#    'easy_thumbnails.processors.filters',
-#)
-#
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -83,16 +78,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'digiriseWeb.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-# }
 
 DATABASES = {
     "default": {
@@ -166,12 +151,6 @@ DEFAULT_FILE_STORAGE = 'digiriseWeb.custom_azure.AzureMediaStorage'
 
 #Rest Framework
 
-OAUTH2_PROVIDER = {
-    # this is the list of available scopes
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
-}
-
-
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
@@ -182,6 +161,38 @@ REST_FRAMEWORK = {
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ]
+    ],
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
 }
 API='http://127.0.0.1:5000/'
+
+# OAuth Settings
+OAUTH_URL_WHITELISTS = []
+
+OAUTH_CLIENT_NAME = 'github'
+
+OAUTH_CLIENT = {
+    'client_id': '5e848e0e7b92272a273f',
+    'client_secret': 'f7db363241746ae3c045a15efa8c8ecf394bb024',
+    'access_token_url': 'https://github.com/login/oauth/access_token',
+    'authorize_url': 'https://github.com/login/oauth/authorize',
+    'api_base_url': 'https://api.github.com/',
+    'redirect_uri': 'https://songrgg.com/oauth/callback',
+    'client_kwargs': {
+        'scope': 'profile email',
+        'token_placement': 'header'
+    },
+    'userinfo_endpoint': 'user',
+}
+
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+
+AUTHENTICATION_BACKENDS = (
+    'oauth2_provider.backends.OAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
+)

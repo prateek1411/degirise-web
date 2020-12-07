@@ -7,5 +7,6 @@ django-filer
 psycopg2-binary==2.8.6
 djangorestframework
 django-oauth-toolkit
+django-cors-middleware
 
 

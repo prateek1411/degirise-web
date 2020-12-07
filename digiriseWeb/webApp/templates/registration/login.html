@@ -6,6 +6,7 @@
     <form class="column is-4 is-offset-4" method="post">
         <h1 class="title">Log In</h1>
         {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
         <div class="field">
             <div class="control">
                 <input autofocus="" class="input is-large" id="id_username" name="username" placeholder="Your Username"

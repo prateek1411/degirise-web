@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 
 class ExtView(APIView):
     url = ''
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
