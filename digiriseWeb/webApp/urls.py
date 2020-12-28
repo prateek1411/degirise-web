@@ -5,16 +5,19 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from rest_framework import routers
-from . import views
-from .views import InfrastructureCodeView, StackList, CreateStack, RunStack
+from . import views, infra_views
+from .forms import DeploymentForm
+from .infra_views import InfrastructureCodeView, StackList, CreateStack, RunStackAPI, DeploymentView
 from rest_framework.authtoken import views as authtoken_views
 import oauth2_provider.views as oauth2_views
 
 admin.autodiscover()
 router = routers.DefaultRouter()
-router.register(r'document', views.DocumentViewSet)
-router.register(r'deployment', views.DeploymentViewSet)
-router.register(r'stack', views.StackViewSet)
+router.register(r'document', infra_views.DocumentViewSet)
+router.register(r'deployment', infra_views.DeploymentViewSet)
+router.register(r'blueprint', infra_views.BlueprintViewSet)
+router.register(r'stack', infra_views.StackViewSet)
+router.register(r'run_stack', infra_views.RunStackViewSet)
 
 oauth2_endpoint_views = [
     path('authorize/', oauth2_views.AuthorizationView.as_view(), name="authorize"),
@@ -52,12 +55,8 @@ urlpatterns = [
                   path('', views.index, name='index'),
                   path('about_us', views.about_us, name='about_us'),
                   url(r'upload_files/(?P<filepath>.*)$', views.upload_files_list, name='listfile'),
-                  url(r'api/v1/generate-stack-code/(?P<deployment_name>.*)$', CreateStack().as_view(), name='stacks'),
-                  url(r'api/v1/stack-list/(?P<filepath>.*)$', StackList().as_view(), name='stacks'),
-                  url(r'api/v1/view-code/(?P<stack>.*)/(?P<code>.*)$', InfrastructureCodeView().as_view(), name='viewcode'),
-                  url(r'api/v1/code/(?P<stack>.*)/(?P<command>.*)$', RunStack().as_view(), name='runcode'),
                   path('delete_all_files', views.delete_all_files, name='delete_all_files'),
-                  path('delete_all_deployments', views.delete_all_deployments, name='delete_all_deployments'),
+                  path('delete_all_deployments', infra_views.delete_all_deployments, name='delete_all_deployments'),
                   # OAuth 2 endpoints:
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

@@ -13,8 +13,7 @@ class ExtView(APIView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def call_api(self, request, *args, **kwargs):
-        headers = {}
+    def call_api(self, request, headers: dict = {}, *args, **kwargs):
         method = request.method.lower()
         method_map = {
             'get': requests.get,
@@ -26,37 +25,37 @@ class ExtView(APIView):
         response = Response(method_map[method](self.url, headers=headers, data=json.dumps(request.data)).json())
         return response
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request,headers, *args, **kwargs):
         content = {
             'user': unicode(request.user),  # `django.contrib.auth.User` instance.
             'auth': unicode(request.auth),  # None
         }
-        return self.call_api(request, *args, **kwargs)
+        return self.call_api(request,headers *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request,headers, *args, **kwargs):
         content = {
             'user': unicode(request.user),  # `django.contrib.auth.User` instance.
             'auth': unicode(request.auth),  # None
         }
-        return self.call_api(request, *args, **kwargs)
+        return self.call_api(request, headers,*args, **kwargs)
 
-    def put(self, request, *args, **kwargs):
+    def put(self, request,headers, *args, **kwargs):
         content = {
             'user': unicode(request.user),  # `django.contrib.auth.User` instance.
             'auth': unicode(request.auth),  # None
         }
-        return self.call_api(request, *args, **kwargs)
+        return self.call_api(request,headers, *args, **kwargs)
 
-    def patch(self, request, *args, **kwargs):
+    def patch(self, request,headers, *args, **kwargs):
         content = {
             'user': unicode(request.user),  # `django.contrib.auth.User` instance.
             'auth': unicode(request.auth),  # None
         }
-        return self.call_api(request, *args, **kwargs)
+        return self.call_api(request,headers, *args, **kwargs)
 
-    def delete(self, request, *args, **kwargs):
+    def delete(self, request,headers, *args, **kwargs):
         content = {
             'user': unicode(request.user),  # `django.contrib.auth.User` instance.
             'auth': unicode(request.auth),  # None
         }
-        return self.call_api(request, *args, **kwargs)
+        return self.call_api(request,headers, *args, **kwargs)
