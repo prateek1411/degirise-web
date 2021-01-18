@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.http import Http404
+from rest_framework.authtoken.models import Token
 from rest_framework.generics import get_object_or_404
 
 from .digiriseApiViews import ExtView
@@ -51,6 +52,7 @@ def after_saving_deployment(sender, instance: Deployment, *args, **kwargs):
             stack.stack_type = ext_api
             stack.save()
 
+
 @receiver(pre_save, sender=RunStack)
 def before_saving_runstack(sender, instance: RunStack, *args, **kwargs):
     headers = {}
@@ -63,19 +65,28 @@ def before_saving_runstack(sender, instance: RunStack, *args, **kwargs):
     else:
         for stack in query_set.iterator():
             data = stack.to_dict()
-            data.update({'command': instance.command,'blueprint': instance.blueprint.blueprint})
+            data.update({'command': instance.command, 'blueprint': instance.blueprint.blueprint})
             data['deployment'] = instance.deployment.deployment
-            data.pop('created_at',None)
-            data.pop('code',None)
+            data.pop('created_at', None)
+            data.pop('code', None)
             req = CallApiRequest(method='post', data=data)
             ext_view = ExtView()
-            ext_view.url = '{0}{1}-code'.format(settings.API,stack.stack_type)
+            ext_view.url = '{0}{1}-code'.format(settings.API, stack.stack_type)
             response = ext_view.call_api(req, headers=headers, *args, **kwargs)
-        #if not response.data['stack_created']:
+        # if not response.data['stack_created']:
         #    print('stack code not generated. Check the Infrastructure service')
         #    exit(1)
 
+
 class CallApiRequest:
-    def __init__(self, method, data: dict = {}):
+    def __init__(self, method, data=None):
+        if data is None:
+            data = {}
         self.method = method
         self.data = data
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
