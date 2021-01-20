@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', False)
 DEBUG = True
 
-ALLOWED_HOSTS = ['digirise.westeurope.cloudapp.azure.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['digirise.westeurope.cloudapp.azure.com', 'localhost', '127.0.0.1', 'digirise.eu','www.digirise.eu']
 
 # Application definition
 
