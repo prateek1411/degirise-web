@@ -3,6 +3,7 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from rest_framework.authtoken import views as token_views
 from django.contrib import admin
 from rest_framework import routers
 from . import views, infra_views
@@ -57,6 +58,10 @@ urlpatterns = [
                   url(r'upload_files/(?P<filepath>.*)$', views.upload_files_list, name='listfile'),
                   path('delete_all_files', views.delete_all_files, name='delete_all_files'),
                   path('delete_all_deployments', infra_views.delete_all_deployments, name='delete_all_deployments'),
+                  url(r'^oauth/', include('social_django.urls', namespace='social')),  # new
                   # OAuth 2 endpoints:
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+urlpatterns += [
+    path('api-token-auth/', token_views.obtain_auth_token)
+]
