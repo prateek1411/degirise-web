@@ -177,7 +177,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     )
 }
-API = 'http://127.0.0.1:5000/'
+API = os.environ.get('API','http://127.0.0.1:5000/')
 
 # OAuth Settings
 OAUTH_URL_WHITELISTS = []
