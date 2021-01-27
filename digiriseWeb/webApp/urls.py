@@ -1,16 +1,15 @@
+import oauth2_provider.views as oauth2_views
 from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
-from django.urls import path, include
-from django.contrib.auth import views as auth_views
-from rest_framework.authtoken import views as token_views
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from django.urls import path, include
 from rest_framework import routers
-from . import views, infra_views
-from .forms import DeploymentForm
-from .infra_views import InfrastructureCodeView, StackList, CreateStack, RunStackAPI, DeploymentView
 from rest_framework.authtoken import views as authtoken_views
-import oauth2_provider.views as oauth2_views
+from rest_framework.authtoken import views as token_views
+
+from . import views, infra_views
 
 admin.autodiscover()
 router = routers.DefaultRouter()

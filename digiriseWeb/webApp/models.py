@@ -1,14 +1,7 @@
 import os
 from itertools import chain
 
-import requests
-from django.conf import settings
 from django.db import models
-from django.db.models.signals import pre_save
-from django.http import Http404, request
-from django.shortcuts import get_object_or_404
-
-from .digiriseApiViews import ExtView
 
 STACK_TYPE_CHOICES = [('infra', 'infra'), ('application', 'application')]
 
