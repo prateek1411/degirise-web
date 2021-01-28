@@ -184,7 +184,6 @@ OAUTH_URL_WHITELISTS = []
 OAUTH_CLIENT_NAME = 'github'
 
 OAUTH_CLIENT = {
-
     'access_token_url': 'https://github.com/login/oauth/access_token',
     'authorize_url': 'https://github.com/login/oauth/authorize',
     'api_base_url': 'https://api.github.com/',
@@ -228,7 +227,7 @@ SOCIAL_AUTH_STORAGE = 'social_django.models.DjangoStorage'  # new
 # ...
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')  # new
-SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['.digirise.eu', '127.0.0.1', 'localhost']
+SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS')
 
 
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
