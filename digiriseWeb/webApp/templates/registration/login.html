@@ -27,8 +27,17 @@
             </label>
         </div>
         <button class="button is-block is-info is-large is-fullwidth">Login</button>
-    </form>
-    <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
-      <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+
+<br><br>
+    <a href="{% url 'social:begin' 'google-oauth2' %}">
+               <img alt="Login With Google" class="is-rounded" src = "https://digirisestatic.blob.core.windows.net/static/webApp/google-btn.png">
+    </a>
+    <a href="{% url 'social:begin' 'github' %}">
+        <br>
+        <img alt="Login With Github" class="is-rounded"
+        src="https://digirisestatic.blob.core.windows.net/static/webApp/github_icon.png">
+    </a>
+<br>
+        </form>
     {% endblock %}
 </div>

@@ -5,9 +5,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
+from django.views.generic import TemplateView
 from rest_framework import routers
 from rest_framework.authtoken import views as authtoken_views
 from rest_framework.authtoken import views as token_views
+from rest_framework.schemas import get_schema_view
 
 from . import views, infra_views
 
@@ -39,14 +41,13 @@ if settings.DEBUG:
     oauth2_endpoint_views += [
         path('authorized-tokens/', oauth2_views.AuthorizedTokensListView.as_view(), name="authorized-token-list"),
         path('authorized-tokens/<pk>/delete/', oauth2_views.AuthorizedTokenDeleteView.as_view(),
-            name="authorized-token-delete"),
+             name="authorized-token-delete"),
     ]
 
 urlpatterns = [
                   path('degirise/', include('django.contrib.auth.urls')),
-                  path('api/v1/', include(router.urls)),
+                  path('api/v1/', include(router.urls), name='router_urls'),
                   path('api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-                  path('api/v1/api-token-auth/', authtoken_views.obtain_auth_token),
                   path('login', auth_views.LoginView.as_view(), name='login'),
                   path('logout', auth_views.LogoutView.as_view(), name='logout'),
                   path('signup', views.signup, name='signup'),
@@ -63,4 +64,18 @@ urlpatterns = [
 
 urlpatterns += [
     path('api-token-auth/', token_views.obtain_auth_token)
+]
+urlpatterns += [
+    path('openapi', get_schema_view(
+        title="Digirise AB",
+        description="Digirise API Documentation",
+        version="1.0.0"
+    ), name='openapi-schema'),
+]
+
+urlpatterns += [
+    path('api/docs', TemplateView.as_view(
+        template_name='rest_framework/swagger-ui.html',
+        extra_context={'schema_url': 'openapi-schema'}
+    ), name='swagger-ui'),
 ]
