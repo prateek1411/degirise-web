@@ -23,9 +23,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
-DEBUG = True
 
-ALLOWED_HOSTS = ['digirise.westeurope.cloudapp.azure.com', 'localhost', '127.0.0.1', '.digirise.eu']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.digirise.eu']
 
 # Application definition
 
@@ -229,7 +228,7 @@ SOCIAL_AUTH_STORAGE = 'social_django.models.DjangoStorage'  # new
 # ...
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')  # new
-SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['azure.com', '127.0.0.1', 'localhost']
+SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['.digirise.eu', '127.0.0.1', 'localhost']
 
 
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
