@@ -10,5 +10,5 @@ django-oauth-toolkit
 django-cors-middleware
 social-auth-app-django
 requests
-
+uritemplate
 
