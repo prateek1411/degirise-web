@@ -6,6 +6,7 @@ sorl-thumbnail
 django-filer
 psycopg2-binary==2.8.6
 djangorestframework
+django-rest-swagger
 django-oauth-toolkit
 django-cors-middleware
 social-auth-app-django
