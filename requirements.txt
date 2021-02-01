@@ -1,4 +1,3 @@
-gunicorn
 Django
 django-storages[azure]
 azure-storage-common
@@ -12,4 +11,5 @@ django-cors-middleware
 social-auth-app-django
 requests
 uritemplate
+uwsgi
 
