@@ -15,10 +15,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.decorators.csrf import ensure_csrf_cookie
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, permissions
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.decorators import permission_classes, renderer_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.schemas import get_schema_view
+from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
 
 from .digiriseApiViews import ExtView
 from .forms import DocumentForm
@@ -116,3 +119,12 @@ def upload_files_list(request, filepath):
 def delete_all_files(request):
     args = Document.objects.all().delete()
     return render(request, 'webApp/delete_all_files.html')
+
+@permission_classes([permissions.AllowAny])
+@renderer_classes([OpenAPIRenderer, SwaggerUIRenderer])
+def swagger_view():
+    return get_schema_view(
+        title="Digirise AB",
+        description="Digirise API Documentation",
+        version="1.0.0"
+    )

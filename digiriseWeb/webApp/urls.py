@@ -12,6 +12,7 @@ from rest_framework.authtoken import views as token_views
 from rest_framework.schemas import get_schema_view
 
 from . import views, infra_views
+from .views import swagger_view
 
 admin.autodiscover()
 router = routers.DefaultRouter()
@@ -66,11 +67,7 @@ urlpatterns += [
     path('api-token-auth/', token_views.obtain_auth_token)
 ]
 urlpatterns += [
-    path('openapi', get_schema_view(
-        title="Digirise AB",
-        description="Digirise API Documentation",
-        version="1.0.0"
-    ), name='openapi-schema'),
+    path('openapi', swagger_view(), name='openapi-schema'),
 ]
 
 urlpatterns += [
