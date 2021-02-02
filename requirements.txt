@@ -12,4 +12,4 @@ social-auth-app-django
 requests
 uritemplate
 uwsgi
-
+pyyaml

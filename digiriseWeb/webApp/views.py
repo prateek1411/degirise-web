@@ -120,8 +120,7 @@ def delete_all_files(request):
     args = Document.objects.all().delete()
     return render(request, 'webApp/delete_all_files.html')
 
-@permission_classes([permissions.AllowAny])
-@renderer_classes([OpenAPIRenderer, SwaggerUIRenderer])
+
 def swagger_view():
     return get_schema_view(
         title="Digirise AB",
