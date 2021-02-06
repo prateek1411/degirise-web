@@ -59,6 +59,7 @@ urlpatterns = [
                   url(r'upload_files/(?P<filepath>.*)$', views.upload_files_list, name='listfile'),
                   path('delete_all_files', views.delete_all_files, name='delete_all_files'),
                   path('delete_all_deployments', infra_views.delete_all_deployments, name='delete_all_deployments'),
+                  path('delete_all_blueprint', infra_views.delete_all_blueprints, name='delete_all_blueprints'),
                   url(r'^oauth/', include('social_django.urls', namespace='social')),  # new
                   # OAuth 2 endpoints:
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,4 +1,5 @@
 import os
+import uuid
 from itertools import chain
 
 from django.db import models
@@ -38,6 +39,7 @@ class Document(models.Model):
 
 
 class Blueprint(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     blueprint = models.CharField(max_length=255, unique=True)
     blueprint_type = models.CharField(max_length=255, blank=True)
     description = models.CharField(max_length=255, blank=True)
@@ -51,6 +53,7 @@ class Blueprint(models.Model):
 
 
 class Deployment(PrintableModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     deployment = models.CharField(max_length=255, unique=True)
     deployment_type = models.CharField(max_length=255, blank=True)
     blueprint = models.ForeignKey(Blueprint, on_delete=models.CASCADE)
@@ -66,6 +69,7 @@ class Deployment(PrintableModel):
 
 
 class Stack(PrintableModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     deployment = models.ForeignKey(Deployment, on_delete=models.CASCADE)
     stack_name = models.CharField(max_length=255, blank=True)
     stack_type = models.CharField(max_length=255, blank=True, choices=STACK_TYPE_CHOICES)
@@ -76,10 +80,8 @@ class Stack(PrintableModel):
 
 
 class RunStack(PrintableModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     deployment = models.ForeignKey(Deployment, on_delete=models.CASCADE)
     blueprint = models.ForeignKey(Blueprint, on_delete=models.CASCADE)
-    stack_name = models.CharField(max_length=255, blank=True)
-    stack_type = models.CharField(max_length=255, blank=True, choices=STACK_TYPE_CHOICES)
-    command = models.CharField(max_length=255, blank=True)
     run_status = models.CharField(max_length=255, blank=True, default='Not Created')
     created_at = models.DateTimeField(auto_now_add=True)

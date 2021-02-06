@@ -24,6 +24,10 @@ def delete_all_deployments(request):
     args = Deployment.objects.all().delete()
     return render(request, 'webApp/delete_all_files.html')
 
+@login_required(login_url='login')
+def delete_all_blueprints(request):
+    args = Blueprint.objects.all().delete()
+    return render(request, 'webApp/delete_all_files.html')
 
 class InfrastructureCodeView(ExtView):
     def __init__(self, **kwargs):

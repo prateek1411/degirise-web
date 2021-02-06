@@ -17,7 +17,8 @@ def before_saving_deployment(sender, instance: Deployment, *args, **kwargs):
     except Http404 as http_error:
         print('Blueprint not found')
     data = instance.to_dict()
-    data['blueprint'] = instance.blueprint.blueprint
+    data['blueprint'] = str(instance.blueprint.blueprint)
+    data['id'] = str(instance.id)
     print(data)
 
     req = CallApiRequest(method='post', data=data)
@@ -65,7 +66,8 @@ def before_saving_runstack(sender, instance: RunStack, *args, **kwargs):
     else:
         for stack in query_set.iterator():
             data = stack.to_dict()
-            data.update({'command': instance.command, 'blueprint': instance.blueprint.blueprint})
+            data['id'] = str(stack.id)
+            data.update({'blueprint': instance.blueprint.blueprint,})
             data['deployment'] = instance.deployment.deployment
             data.pop('created_at', None)
             data.pop('code', None)
