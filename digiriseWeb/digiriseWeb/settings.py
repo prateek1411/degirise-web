@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.digirise.eu']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.digirise.se']
 
 # Application definition
 
@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'oauth2_provider',
     'corsheaders',
-    'easy_thumbnails',
+#    'easy_thumbnails',
     'sorl.thumbnail',
-    'filer'
+#    'filer'
 ]
 
 MIDDLEWARE = [
@@ -152,7 +152,7 @@ AZURE_LOCATION = 'webApp'
 AZURE_CONTAINER = 'static'
 
 STATIC_LOCATION = 'static'
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
+STATIC_URL = 'static/'
 MEDIA_CONTAINER = 'media'
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_CONTAINER}/'
 STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'

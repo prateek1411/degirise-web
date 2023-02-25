@@ -18,21 +18,21 @@
              <img src="{{ im.url }}?{{ sas_token }}">
             {% endthumbnail %}
             {% elif doc.get_extension == '.pdf' %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_pdf.png">
+            <img src="static/webApp/webApp/icons/file_type_pdf.png">
             {% elif doc.get_extension == '.log' %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_txt.png">
+            <img src="static/webApp/webApp/icons/file_type_txt.png">
             {% elif 'doc' in doc.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_doc.png">
+            <img src="static/webApp/webApp/icons/file_type_doc.png">
             {% elif 'xls' in doc.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_xls.png">
+            <img src="static/webApp/webApp/icons/file_type_xls.png">
             {% elif 'zip' in doc.get_extension or rar in doc.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_zip.png">
+            <img src="static/webApp/webApp/icons/file_type_zip.png">
             {% elif 'ppt' in doc.get_extension or 'PPT' in doc.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_ppt.png">
+            <img src="static/webApp/webApp/icons/file_type_ppt.png">
             {% elif 'htm' in doc.get_extension %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_html.png">
+            <img src="static/webApp/webApp/icons/file_type_html.png">
             {% else %}
-            <img src="https://digirisestatic.blob.core.windows.net/static/webApp/webApp/icons/file_type_icons-18.png">
+            <img src="static/webApp/webApp/icons/file_type_icons-18.png">
             {% endif %}
 
         </a>
